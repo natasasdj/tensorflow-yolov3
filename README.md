@@ -21,6 +21,7 @@ $ git clone https://github.com/YunYang1994/tensorflow-yolov3.git
 $ cd tensorflow-yolov3
 $ pip install -r ./docs/requirements.txt
 $ pip install opencv-contrib-python
+$ pip install easydict
 ```
 3. Exporting loaded COCO weights as TF checkpoint(`yolov3_coco.ckpt`)
 ```bashrc
