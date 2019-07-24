@@ -130,16 +130,16 @@ $ wget http://images.cocodataset.org/annotations/image_info_test2017.zip
 
 ### 3.2 Train on the Robot Dataset
 1. Label robot dataset with Labelbox software and export an annotation file into json format (camera\_L.json, camera\_R.json, camera\_T.json).
-2. Create folder $robot\_dataset$ with the robot datasets put into folders camera\_L, camera\_R, camera\_T. Also put the json annotation files into the $robot\_dataset$ folder.
+2. Create folder _robot\_dataset_ with the robot datasets put into folders _camera\_L_, _camera\_R_, _camera\_T_. Also put the json annotation files into the _robot\_dataset$ folder_.
 3. Convert the annotation json files into the annonation format required by this software as follows:
 ``` 
 python scripts/labelbox\_format\_convert.py L 0.2 0.2 1
 python scripts/labelbox\_format\_convert.py R 0.2 0.2 2
 python scripts/labelbox\_format\_convert.py T 0.2 0.2 3
 ```
-Here the arguments for $labelbox\_format\_convert.py$ represent: camera type, sampling probability for the test dataset, sampling probability for the validation dataset and random seed respectively.
+Here the arguments for labelbox\_format\_convert.py are: camera type, sampling probability for the test dataset, sampling probability for the validation dataset and random seed respectively.
 5. Training and evaluation is the same as explained above, where we train starting from the pretrained model on the coco dataset. Note that it is necessary to create object.names file as explained above and to put it into the $robot\_dataset$ folder. Also core/config.py needs to be changed with the proper paths to the training and test dataset, number of epochs and the path to the model for the evaluation.
-6. The trained model is writen into the $checkout$ folder, and the loss history during the training process is written into the $checkout/loss.csv$ file. 
+6. The trained model is writen into the _checkout_ folder, and the loss history during the training process is written into the _checkout/loss.csv_ file. 
 
 
 ## part 4. Why it is so magical ?
