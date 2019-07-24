@@ -132,7 +132,9 @@ class YoloTrain(object):
             print('=> Now it starts to train YOLOV3 from scratch ...')
             self.first_stage_epochs = 0
 
-        for epoch in range(1, 1+self.first_stage_epochs+self.second_stage_epochs):
+        no_epochs = self.first_stage_epochs+self.second_stage_epochs
+        loss_list = [None]* no_epochs
+        for epoch in range(1, 1+no_epochs):
             if epoch <= self.first_stage_epochs:
                 train_op = self.train_op_with_frozen_variables
             else:
@@ -172,13 +174,22 @@ class YoloTrain(object):
 
                 test_epoch_loss.append(test_step_loss)
 
+            
             train_epoch_loss, test_epoch_loss = np.mean(train_epoch_loss), np.mean(test_epoch_loss)
             ckpt_file = "./checkpoint/yolov3_test_loss=%.4f.ckpt" % test_epoch_loss
             log_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
-            print("=> Epoch: %2d Time: %s Train loss: %.2f Test loss: %.2f Saving %s ..."
+            loss_list[epoch-1] = (train_epoch_loss, test_epoch_loss)
+            if epoch % 50 == 0:
+                print("=> Epoch: %2d Time: %s Train loss: %.2f Test loss: %.2f Saving %s ..."
                             %(epoch, log_time, train_epoch_loss, test_epoch_loss, ckpt_file))
-            self.saver.save(self.sess, ckpt_file, global_step=epoch)
+                self.saver.save(self.sess, ckpt_file, global_step=epoch)
+            
 
+        with open("./checkpoint/loss.csv", 'a+') as f:
+            f.write('train_loss,test_loss\n')
+            for loss in loss_list:
+                f.write(str(loss[0])+','+str(loss[1])+'\n')
+            
 
 
 if __name__ == '__main__': YoloTrain().train()
