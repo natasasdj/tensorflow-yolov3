@@ -20,6 +20,10 @@ $ git clone https://github.com/YunYang1994/tensorflow-yolov3.git
 ```bashrc
 $ cd tensorflow-yolov3
 $ pip install -r ./docs/requirements.txt
+$ pip install opencv-contrib-python
+$ pip install easydict
+# CuDNN should be at least 7.2.1
+# https://stackoverflow.com/questions/38137828/how-do-i-update-cudnn-to-a-newer-version
 ```
 3. Exporting loaded COCO weights as TF checkpoint(`yolov3_coco.ckpt`)
 ```bashrc
