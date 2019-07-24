@@ -129,7 +129,7 @@ $ wget http://images.cocodataset.org/annotations/image_info_test2017.zip
 ```
 
 ### 3.2 Train on the Robot Dataset
-1. Label robot dataset with Labelbox software and export an annotation file into json format (`camera`\_`L.json`, `camera\_R.json`, `camera\_T.json`).
+1. Label robot dataset with Labelbox software and export an annotation file into json format (camera\_L.json, camera\_R.json, camera\_T.json).
 2. Create folder $robot\_dataset$ with the robot datasets put into folders camera\_L, camera\_R, camera\_T. Also put the json annotation files into the $robot\_dataset$ folder.
 3. Convert the annotation json files into the annonation format required by this software as follows:
 ``` 
