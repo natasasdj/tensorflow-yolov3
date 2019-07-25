@@ -179,12 +179,15 @@ class YoloTrain(object):
             ckpt_file = "./checkpoint/yolov3_test_loss=%.4f.ckpt" % test_epoch_loss
             log_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
             loss_list[epoch-1] = (train_epoch_loss, test_epoch_loss)
-            if epoch % 50 == 0:
-                print("=> Epoch: %2d Time: %s Train loss: %.2f Test loss: %.2f Saving %s ..."
-                            %(epoch, log_time, train_epoch_loss, test_epoch_loss, ckpt_file))
-                self.saver.save(self.sess, ckpt_file, global_step=epoch)
-            
+            #if epoch % 50 == 0:
+            #    print("=> Epoch: %2d Time: %s Train loss: %.2f Test loss: %.2f Saving %s ..."
+            #                %(epoch, log_time, train_epoch_loss, test_epoch_loss, ckpt_file))
+            #    self.saver.save(self.sess, ckpt_file, global_step=epoch)
 
+        print("=> Epoch: %2d Time: %s Train loss: %.2f Test loss: %.2f Saving %s ..."
+              %(epoch, log_time, train_epoch_loss, test_epoch_loss, ckpt_file))
+        self.saver.save(self.sess, ckpt_file, global_step=epoch)
+                                                
         with open("./checkpoint/loss.csv", 'a+') as f:
             f.write('train_loss,test_loss\n')
             for loss in loss_list:
