@@ -128,9 +128,7 @@ $ wget http://images.cocodataset.org/zips/test2017.zip
 $ wget http://images.cocodataset.org/annotations/image_info_test2017.zip 
 ```
 
-### 3.2 Train Robot Dataset
-=======
-### 3.3 Train on the Robot Dataset
+### 3.3 Train Robot Dataset
 1. Label robot dataset with Labelbox software and export an annotation file into json format (_camera\_L.json_, _camera\_R.json_, _camera\_T.json_).
 
 2. Create folder _robot\_dataset_ with the robot datasets put into folders _camera\_L_, _camera\_R_, _camera\_T_. Also put the json annotation files into the _robot\_dataset_ folder.
@@ -146,7 +144,6 @@ Here the arguments for _labelbox\_format\_convert.py_ are: camera type, sampling
 4. Training and evaluation is the same as explained above, where we train starting from the pretrained model on the coco dataset. Note that it is necessary to create object.names file as explained above and to put it into the $robot\_dataset$ folder. Also _core/config.py_ needs to be changed with the proper paths to the training and test dataset, number of epochs and the path to the model for the evaluation.
 
 5. The trained model is writen into the _checkout_ folder, and the loss history during the training process is written into the _checkout/loss.csv_ file. 
-
 
 ## part 4. Why it is so magical ?
 YOLO stands for You Only Look Once. It's an object detector that uses features learned by a deep convolutional neural network to detect an object. Although we has successfully run these codes, we must understand how YOLO works. 
