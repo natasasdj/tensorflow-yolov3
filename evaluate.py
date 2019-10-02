@@ -14,6 +14,7 @@
 import cv2
 import os
 import shutil
+import time
 import numpy as np
 import tensorflow as tf
 import core.utils as utils
@@ -54,7 +55,7 @@ class YoloTest(object):
 
         org_image = np.copy(image)
         org_h, org_w, _ = org_image.shape
-
+        start = time.time()
         image_data = utils.image_preporcess(image, [self.input_size, self.input_size])
         image_data = image_data[np.newaxis, ...]
 
@@ -71,6 +72,8 @@ class YoloTest(object):
                                     np.reshape(pred_lbbox, (-1, 5 + self.num_classes))], axis=0)
         bboxes = utils.postprocess_boxes(pred_bbox, (org_h, org_w), self.input_size, self.score_threshold)
         bboxes = utils.nms(bboxes, self.iou_threshold)
+        end = time.time()
+        print("Prediction_time:", start-end)
 
         return bboxes
 
